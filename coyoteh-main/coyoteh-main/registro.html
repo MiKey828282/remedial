@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./imagenes/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="reg.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>El Coyotito | Registro</title>
+    <style>
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .register-card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            max-width: 100%;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem 0.75rem;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 0.875rem;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 0 0.25rem;
+            pointer-events: none;
+            transition: 0.2s ease all;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -20px;
+            left: 10px;
+            font-size: 0.75rem;
+            color: #007bff;
+        }
+
+        .input-group input::placeholder {
+            color: transparent;
+        }
+
+        /* Ajuste del espaciado de las etiquetas en pantallas medianas y grandes */
+        @media (min-width: 576px) {
+            .input-group label {
+                top: 10px;
+                left: 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .input-group label {
+                top: 15px;
+                left: 20px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .warning {
+            color: red;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .btn-custom {
+            background-color: #ce93d8;
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #ab47bc;
+        }
+
+        .form-control {
+            border-radius: 0.25rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .profile-section p {
+            font-size: 0.875rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        @media (max-width: 576px) {
+            .register-card {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .input-group label {
+                font-size: 0.75rem;
+                top: 0;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="register-container">
+                    <div class="register-card">
+                        <div class="profile-section mb-3">
+                            <form action="registroylogin/registro.php" method="POST" enctype="multipart/form-data">
+                                <input type="file" name="foto" id="foto" class="form-control mb-2" required>
+                                <p>Coloca una foto de perfil (jpg o png)</p>
+                        </div>
+                        <div class="register-section">
+                            <div class="logo mb-4">El Coyotito</div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" required="required" name="first_name" placeholder="Nombre/s">
+                                    <label>Nombre/s</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" required="required" name="last_name" placeholder="Apellido/s">
+                                    <label>Apellido/s</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" required="required" name="email" placeholder="Email">
+                                    <label>Email</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="tel" class="form-control" required="required" name="phone" placeholder="Numero de telefono">
+                                    <label>Numero de telefono</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" id="password" class="form-control" required="required" name="password" placeholder="Contraseña">
+                                    <label>Contraseña</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" id="confirm-password" class="form-control" required="required" name="confirm_password" placeholder="Confirmar contraseña">
+                                    <label>Confirmar contraseña</label>
+                                </div>
+                                <span id="password-warning" class="warning"></span>
+                                <a href="log.html" class="d-block text-center mb-3" style="color: #ce93d8;">Ya tengo cuenta</a>
+                                <button type="submit" name="registro" value="Registrar" class="btn btn-custom w-100">Continuar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+:root{
+    /* colors */
+    --body-color: #fce4ec; /* pastel pink */
+    --white-color: #ffffff;
+    --container-color: #f8bbd0; /* light pink */
+    --light-bacco: #ce93d8; /* pastel purple */
+    --yellow-light: #ffeb3b; /* pastel yellow */
+    --background-gradient: linear-gradient(45deg, #ce93d8, #f8bbd0);
+}
+
+*{
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--body-color);
+    overflow: hidden;
+}
+
+.register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200\\px;
+    background: var(--background-gradient);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.register-card{
+    display: flex;
+    width: 100%;
+    background: var(--white-color);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.profile-section{
+    background: var(--container-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 50%;
+    text-align: center;
+}
+
+.profile-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.edit-profile-btn{
+    background: var(--light-bacco);
+    color: var(--white-color);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.register-section{
+    padding: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo{
+    font-size: 2em;
+    color: var(--light-bacco);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input,
+.input-group select{
+    width: 100%;
+    padding: 10px 10px 10px 0;
+    border: none;
+    border-bottom: 2px solid var(--light-bacco);
+    background: transparent;
+    outline: none;
+    color: var(--light-bacco);
+}
+
+.input-group label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: var(--light-bacco);
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group select:focus ~ label,
+.input-group select:valid ~ label{
+    top: -5px;
+    left: 0;
+    color: var(--light-bacco);
+    font-size: 0.85em;
+}
+
+.warning{
+    color: red;
+    font-size: 0.9em;
+    display: none;
+}
+
+button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: var(--light-bacco);
+    color: var(--white-color);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: var(--yellow-light);
+    color: var(--body-color);
+}

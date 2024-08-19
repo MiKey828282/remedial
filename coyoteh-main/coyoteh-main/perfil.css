@@ -1,0 +1,369 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+        /*nav*/
+#logoop{
+  max-width: 40%;
+  height: auto;
+}
+
+/* En pantallas pequeñas */
+@media (max-width: 400px) {
+  #navs {
+    padding: 1px 10px; /* Reduce el padding */
+  }
+
+  #navs .row {
+    align-items: flex-start;
+  }
+
+  #navs .col {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  #navs img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  /* Hacer que los elementos del menú sean flexibles */
+  #opc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #opc a {
+    margin: 10px 0; /* Espaciado entre los enlaces */
+  }
+
+  /* Mostrar el menú de categorías como un dropdown en pantallas pequeñas */
+  #categoriasMenu {
+    position: static; /* Quitar el position fixed para que se acomode en el flujo normal del documento */
+    display: none; /* Ocultar inicialmente */
+  }
+
+  #categorias {
+    cursor: pointer;
+  }
+
+  /* Estilos para el menú de búsqueda */
+  #search-container {
+    position: static;
+    width: 100%;
+    right: 0; /* Ajustar el contenedor al borde derecho en pantallas pequeñas */
+  }
+  
+  #search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Estilos para el dropdown del usuario */
+  .dropdown-content {
+    position: static;
+    width: 100%;
+    right: 0; /* Ajustar el dropdown al borde derecho en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 576px) {
+  #navs {
+    padding: 1px 5px; /* Reduce el padding aún más */
+  }
+
+  #navs img {
+    max-width: 80%;
+  }
+
+  #search-container {
+    right: 0;
+  }
+}
+
+
+#navs {
+  background-color: #fab9c3;
+  padding: 1px 100px;
+}
+.material-symbols-outlined {
+  font-size: 50px;
+  color: aliceblue;
+}
+.inverted-icon {
+  transform: scaleX(-1);
+}
+#opc {
+  color: aliceblue;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.animate-link.opc2 {
+  text-decoration: none;
+  color: aliceblue;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.animate-link::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: aliceblue;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.animate-link:hover {
+  color: aliceblue;
+}
+
+.animate-link:hover::before {
+  transform: scaleX(1);
+}
+
+.opc2 {
+  background-color: #fab9c3;
+  border: none;
+}
+#inicio {
+  padding: 0;
+  position: relative;
+  z-index: 0;
+  text-align: center; /* Alinear texto al centro */
+}
+
+#contacto {
+  background-color: #fab9c3;
+  padding: 10px;
+  margin: 0;
+}
+
+#coyotelog {
+  position: absolute;
+  bottom: 100%;
+  transform: translateY(61%);
+  right: 0;
+  z-index: 1;
+}
+
+#iconscont {
+  max-width: 30%; /* Ajustar el ancho máximo para iconos */
+  height: auto;
+  margin: 5px; /* Espacio entre iconos */
+}
+
+#insta {
+  max-width: 20%; /* Ajustar el ancho máximo para Instagram */
+  height: auto;
+}
+
+/* En pantallas pequeñas */
+@media (max-width: 768px) {
+  #contacto .row {
+    flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    align-items: center; /* Centrar elementos */
+  }
+
+  #contacto .col {
+    margin-bottom: 20px; /* Espaciado entre columnas */
+  }
+
+  #coyotelog {
+    max-width: 80%; /* Aumentar el ancho máximo en pantallas pequeñas */
+  }
+
+  #iconscont,
+  #insta {
+    max-width: 50%; /* Ajustar el ancho máximo para iconos */
+  }
+}
+
+@media (max-width: 576px) {
+  #contacto .row {
+    text-align: center; /* Alinear texto al centro en pantallas muy pequeñas */
+  }
+
+  #contacto .col {
+    margin-bottom: 15px; /* Reducir el espaciado entre columnas */
+  }
+
+  #coyotelog {
+    max-width: 100%; /* Ajustar aún más el ancho máximo en pantallas muy pequeñas */
+  }
+
+  #iconscont,
+  #insta {
+    max-width: 17%; /* Ajustar el ancho máximo para iconos en pantallas pequeñas */
+  }
+}
+
+/* Contenedor de búsqueda */
+#search-container {
+  position: absolute;
+  top: 50px;
+  right: 300px;
+  width: 50%;
+  z-index: 1000;
+}
+
+/* cuadr abajo */
+#search-input {
+  width: 46%;
+  padding: 10px;
+  border: 3px solid #fab9c3;
+  border-radius: 100px;
+  margin-bottom: 10px;
+  box-sizing: border-box;  
+}
+
+.search-results {
+  width: 60%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  border: 3px solid #fab9c3;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-radius: 8px;
+  float: right;
+  }
+
+.hidden {
+  display: none;
+}
+
+.product-item {
+  width: 120px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.product-item:hover{
+  transform: translateY(-5px);
+  transition-duration: .2s;
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-item h4 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.product-item p {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.product-item .price {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 5px;
+}
+/*catalogo*/
+.categoria-menu {
+  position: fixed;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border: 3px solid #fab9c3;
+}
+
+.categoriaopc {
+  display: block;
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.categoriaopc:hover {
+  background-color: #fecfd6;
+  transition-duration: .5s;
+}
+  /*usuario*/
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-toggle {
+    display: none;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border: 3px solid #fab9c3;
+    right: 40px;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #fecfd6;
+    transition-duration: .5s;
+  }
+  
+  .dropdown-toggle:checked ~ .dropdown-content {
+    display: block;
+  }
+/*back-button*/
+.back-button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fab9c3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #e699a5;
+}
