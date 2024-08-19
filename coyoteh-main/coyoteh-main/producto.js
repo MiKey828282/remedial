@@ -24,14 +24,16 @@ document.getElementById('back-button').addEventListener('click', () => {
   }
   
   document.getElementById('add-to-cart').addEventListener('click', () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push(selectedProduct);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${selectedProduct.name} ha sido añadido al carrito`);
+    //let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    //cart.push(selectedProduct);
+    //localStorage.setItem('cart', JSON.stringify(cart));
+    //alert(`${selectedProduct.name} ha sido añadido al carrito`);
   });
 
-  const image = document.getElementById('detail-image');
+const image = document.getElementById('detail-image');
 const container = document.querySelector('.image-container');
+let quantity = 1;
+document.getElementById('product-quantity').textContent = quantity;
 
 container.addEventListener('mousemove', (e) => {
   const rect = image.getBoundingClientRect();
@@ -62,11 +64,12 @@ container.addEventListener('mousemove', (e) => {
     zoomed.style.display = 'none';
   });
 });
-let quantity = 1; // Cantidad inicial
 
 document.getElementById('increase-quantity').addEventListener('click', () => {
-    quantity++;
-    document.getElementById('product-quantity').textContent = quantity;
+  console.log('Increase quantity');
+  quantity++;
+  document.getElementById('product-quantity').textContent = quantity;
+  console.log(quantity);
 });
 
 document.getElementById('decrease-quantity').addEventListener('click', () => {
@@ -76,32 +79,48 @@ document.getElementById('decrease-quantity').addEventListener('click', () => {
     }
 });
 
+// Manejar el evento de clic para agregar al carrito
 document.getElementById('add-to-cart').addEventListener('click', () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // Obtener y validar la cantidad
+  let quantityText = document.getElementById('product-quantity').textContent.trim();
+  let quantityToAdd = parseInt(quantityText, 10);
+  if (isNaN(quantityToAdd) || quantityToAdd < 1) {
+      quantityToAdd = 1; // Valor por defecto si la cantidad no es válida
+  }
 
-    const productToAdd = {
-        ...selectedProduct,
-        quantity: quantity // Agregamos la cantidad seleccionada
-    };
+  const productToAdd = {
+      ...selectedProduct,
+      quantity: quantityToAdd // Añadir la cantidad seleccionada
+  };
 
-    // Verificamos si el producto ya está en el carrito
-    const existingProductIndex = cart.findIndex(item => item.name === selectedProduct.name);
+  console.log(productToAdd);
 
-    if (existingProductIndex !== -1) {
-        // Si ya existe, actualizamos la cantidad
-        cart[existingProductIndex].quantity += quantity;
-    } else {
-        // Si no existe, lo agregamos al carrito
-        cart.push(productToAdd);
-    }
+  // Verificar si el producto ya está en el carrito
+  const existingProductIndex = cart.findIndex(item => item.id === selectedProduct.id);
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${quantity} ${selectedProduct.name}(s) ha(n) sido añadido(s) al carrito`);
+  if (existingProductIndex !== -1) {
+      // Si existe, actualizar la cantidad
+      let existingProduct = cart[existingProductIndex];
+      let existingQuantity = parseInt(existingProduct.quantity, 10);
+      if (isNaN(existingQuantity)) {
+          existingQuantity = 0; // Valor por defecto si la cantidad existente no es válida
+      }
+      cart[existingProductIndex].quantity = existingQuantity + quantityToAdd;
+  } else {
+      // Si no existe, añadirlo al carrito
+      cart.push(productToAdd);
+  }
 
-    // Reiniciamos la cantidad a 1 después de agregar al carrito
-    quantity = 1;
-    document.getElementById('product-quantity').textContent = quantity;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(`${quantityToAdd} ${selectedProduct.name}(s) ha(n) sido añadido(s) al carrito`);
+
+  // Resetear la cantidad a 1 después de añadir al carrito
+  quantity = 1;
+  document.getElementById('product-quantity').textContent = quantity;
 });
+
 document.getElementById('search-button').addEventListener('click', function() {
   const query = document.getElementById('search-input').value;
   searchAPI(query);

@@ -69,7 +69,8 @@ function displaySearchResults(products) {
               name: product.name,
               imageUrl: product.imageUrl,
               price: product.price,
-              description: product.detail
+              description: product.detail,
+              quantity: 1
           }));
           // Redirigir a producto.html
           window.location.href = 'producto.html';
@@ -268,11 +269,16 @@ function displayProductsMV(products, containerId, limit = null) {
 
 function addToCart(product) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
   // Verificar si el producto ya está en el carrito
   if (cart.some(item => item.id === product.id)) {
     alert(`${product.name} ya está en el carrito`);
     return; // Salir de la función si el producto ya está en el carrito
   }
+  
+  // Añadir la cantidad al producto
+  product.quantity = 1;
+  
   cart.push(product);
   localStorage.setItem('cart', JSON.stringify(cart));
   alert(`${product.name} ha sido añadido al carrito`);

@@ -30,17 +30,25 @@ async function getProductById(id) {
 async function addToCart(itemId) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const existingItem = cart.find(item => item.id === itemId);
-  
-
+  console.log('Existing item:', existingItem);
+  console.log('Cart:', cart);
   if (existingItem) {
+    existingItem.quantity = parseInt(existingItem.quantity);
+    if (isNaN(existingItem.quantity)) {
+      existingItem.quantity = 2; 
+    } else {
       existingItem.quantity += 1;
+    }
   } else {
-      const product = await getProductById(itemId);
-      if (product) {
-          product.price = parseFloat(product.price) || 0; // Asegurarse de que el precio sea un número válido
-          product.quantity = 1; 
-          cart.push(product);
+    const product = await getProductById(itemId);
+    if (product) {
+      product.price = parseFloat(product.price);
+      if (isNaN(product.price)) {
+        product.price = 0; // Default to 0 if price is not a valid number
       }
+      product.quantity = 1; 
+      cart.push(product);
+    }
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
