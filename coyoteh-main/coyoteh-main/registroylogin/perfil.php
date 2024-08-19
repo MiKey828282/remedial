@@ -54,31 +54,44 @@ mysqli_close($conexion);
 <body>
 <div class="container-fluid" id="navs">
       <div class="row">
-        <div class="col text-start">
-          <a href="../index.html"><img src="../imagenes/El coyotito.png" style="width: 80%; height: auto; max-width: 80%" /></a>
+        <div class="col-4 text-center col-1">
+          <a href="#" onclick="location.reload();">
+            <img src="./imagenes/El coyotito.png" style="width: 80%; height: auto; max-width: 80%" />
+          </a>
           <div class="container" style="margin-top: 30px; padding: 0">
             <i>
               <h4 id="opc">
-                <a href="../index.html" class="animate-link" >Inicio |</a>
+                <a href="index.html" class="animate-link" >Inicio |</a>
+                <a href="#" class="opc2 animate-link" id="categorias" style="color: aliceblue;">Categorías |</a>
+                  <div id="categoriasMenu" class="categoria-menu" style="display: none;">
+                    <button class="categoriaopc" categoria="Belleza"><a href="#productostod" style="color: black;">Belleza</a></button>
+                    <button class="categoriaopc" categoria="Papeleria"><a href="#productostod" style="color: black;">Papeleria</a></button>
+                    <button class="categoriaopc" categoria="Accesorios"><a href="#productostod" style="color: black;">Accesorios</a></button>
+                    <button class="categoriaopc" categoria="Juegos"><a href="#productostod" style="color: black;">Juegos</a></button>
+                    <button class="categoriaopc" categoria="Todos"><a href="#productostod" style="color: black;">Todos</a></button>
+                  </div>
+                <a href="#contacto" class="animate-link">Contacto</a>
               </h4>
             </i> 
           </div>
         </div>
-        <div class="col text-center">
-          <a href="index.html"><img src="../imagenes/logo.png" style="max-width: 35%; height: auto" id="logoop" /></a>
+        <div class="col-4 text-center col-2">
+          <a href="#" onclick="location.reload();">
+            <img src="./imagenes/logo.png" id="logoop" />
+          </a>
         </div>
-        <div class="col text-end" style="margin-top: 50px">
+        <div class="col text-center col-3 d-flex flex-column flex-md-row justify-content-md-end align-items-center">
           <div class="container">
             <button id="search-button" class="opc2">
               <a href="#" class="animate-link"><span class="material-symbols-outlined inverted-icon">search</span></a>
           </button>
-          <div id="search-container" class="hidden">
+          <div id="search-container" style="position: absolute; top: auto; right: 50px; width: 70%; margin: 0 auto;" class="hidden">
               <input type="text" id="search-input" placeholder="Buscar productos..." autofocus />
               <div id="search-results-container" class="search-results"></div>
           </div>
-  
+
               <button class="opc2" id="view-cart">
-                <a href="../carrito.html" class="animate-link"><span class="material-symbols-outlined"> shopping_basket </span></a>
+                <a href="carrito.html" class="animate-link"><span class="material-symbols-outlined"> shopping_basket </span></a>
               </button>
               <div class="dropdown">
                 <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle">
@@ -87,7 +100,7 @@ mysqli_close($conexion);
                 </label>
                 <div class="dropdown-content">
                   <a href="registroylogin/perfil.php">Mi perfil</a>
-                  <a href="../favoritos.html">Favoritos</a>
+                  <a href="./favoritos.html">Favoritos</a>
                   <a href="registroylogin/logout.php">Cerrar sesión</a>
                 </div>
             </div>

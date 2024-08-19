@@ -286,9 +286,14 @@ function addToCart(product) {
 
 function addToFavorites(product) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  favorites.push(product);
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  alert(`${product.name} ha sido añadido a favoritos`);
+  const isAlreadyFavorite = favorites.some(fav => fav.id === product.id);
+  if (isAlreadyFavorite) { 
+    alert(`${product.name} ya está en favoritos`);
+  } else {
+    favorites.push(product);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    alert(`${product.name} ha sido añadido a favoritos`);
+  }
 }
 
 function viewProductDetails(product) {
@@ -302,7 +307,6 @@ viewCartBtn.addEventListener('click', () => {
 });
 
 /*perfil*/
-
 document.getElementById('search-button').addEventListener('click', function() {
     const query = document.getElementById('search-input').value;
     searchAPI(query);

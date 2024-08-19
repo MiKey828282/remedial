@@ -1,77 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-  loadFavorites();
-
-  document.getElementById('clear-favorites').addEventListener('click', () => {
-      localStorage.removeItem('favorites');
-      loadFavorites(); // Recargar la lista después de vaciar
-  });
-});
-
-
-function loadFavorites() {
-  const favoritesContainer = document.getElementById('favorites');
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-  favoritesContainer.innerHTML = ''; // Limpiar contenedor antes de agregar productos
-
-  favorites.forEach((product, index) => {
-      const productDiv = document.createElement('div');
-      productDiv.classList.add('product');
-      productDiv.innerHTML = `
-          <img src="${product.imageUrl}" alt="${product.name}" />
-          <div class="product-info">
-              <h4>${product.name}</h4>
-              <p>$${product.price}</p>
-              <p>${product.categoria}</p>
-              <button class="btn btn-danger btn-sm remove-favorite" data-index="${index}">Eliminar</button>
-              <button class="btn btn-success btn-sm add-to-cart" data-id="${product.id}">Agregar al Carrito</button>
-          </div>
-      `;
-      favoritesContainer.appendChild(productDiv);
-  });
-
-  // Agregar evento para eliminar productos individuales
-  document.querySelectorAll('.remove-favorite').forEach(button => {
-      button.addEventListener('click', function () {
-          const index = this.getAttribute('data-index');
-          removeFavorite(index);
-      });
-  });
-
-  // Agregar evento para añadir productos al carrito
-  document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', function () {
-          const productId = this.getAttribute('data-id');
-          displayCart(); // Actualizar carrito después de añadir el producto
-      });
-  });
-}
-
-function removeFavorite(index) {
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  favorites.splice(index, 1);
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  loadFavorites(); // Recargar la lista después de eliminar
-}
-
-async function addToCart(itemId) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const existingItem = cart.find(item => item.id === itemId);
-
-  if (existingItem) {
-      existingItem.quantity += 1;
-  } else {
-      const product = await getProductById(itemId);
-      if (product) {
-          product.quantity = 1;
-          cart.push(product);
-      }
-  }
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert('Producto agregado al carrito');
+    loadFavorites();
   
+    document.getElementById('clear-favorites').addEventListener('click', () => {
+        localStorage.removeItem('favorites');
+        loadFavorites(); // Recargar la lista después de vaciar
+    });
+  });
+  
+  function loadFavorites() {
+    const favoritesContainer = document.getElementById('favorites');
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+    favoritesContainer.innerHTML = ''; // Limpiar contenedor antes de agregar productos
+  
+    favorites.forEach((product, index) => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+            <img src="${product.imageUrl}" alt="${product.name}" class="product-image" data-id="${product.id}" />
+            <div class="product-info">
+                <h4>${product.name}</h4>
+                <p>$${product.price}</p>
+                <p>${product.categoria}</p>
+                <button class="btn btn-danger btn-sm remove-favorite" data-index="${index}">Eliminar</button>
+            </div>
+        `;
+        favoritesContainer.appendChild(productDiv);
+    });
+  
+    // Agregar evento click a cada imagen de producto para redirigir a la página de detalles
+    document.querySelectorAll('.product-image').forEach(image => {
+        image.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevenir comportamiento por defecto que pueda causar problemas
+            const productId = e.target.getAttribute('data-id');
+            window.location.href = `producto.html?id=${productId}`;
+        });
+    });
+  
+    // Agregar evento para eliminar productos individuales
+    document.querySelectorAll('.remove-favorite').forEach(button => {
+        button.addEventListener('click', function () {
+            const index = this.getAttribute('data-index');
+            removeFavorite(index);
+        });
+    });
+  
+    function removeFavorite(index) {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        favorites.splice(index, 1);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        loadFavorites(); // Recargar la lista después de eliminar
+    }
 }
+
+
 
 async function getProductById(id) {
   try {
